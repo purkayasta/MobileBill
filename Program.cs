@@ -19,11 +19,16 @@ if (!DateTime.TryParse(Console.ReadLine(), out DateTime endDate))
     return;
 }
 
+var unModifiedStartDate = startDate;
+
+
 bool isPeak = false;
 
 double peakRate = 0;
 double offPeakRate = 0;
 double totalMoney = 0;
+
+Console.WriteLine("=== Calculating Bill ===");
 
 var peakHour = RulesFactory.GetPeakHour();
 
@@ -48,6 +53,8 @@ if (isPeak)
     for (int i = 0; i <= loop; i++)
     {
         totalMoney += peakRate;
+
+        Console.WriteLine($"{unModifiedStartDate} + {pulseRate} second ({startDate}) = {peakRate} paisa");
     }
 }
 else
@@ -58,13 +65,13 @@ else
         if (startDate.TimeOfDay >= peakHour.Item1)
         {
             totalMoney += peakRate;
+            Console.WriteLine($"{unModifiedStartDate} + {pulseRate} second ({startDate}) = {peakRate} paisa");
         }
         else
         {
             totalMoney += offPeakRate;
+            Console.WriteLine($"{unModifiedStartDate} + {pulseRate} second ({startDate}) = {offPeakRate} paisa");
         }
-
-        Console.WriteLine($"");
     }
 }
 
